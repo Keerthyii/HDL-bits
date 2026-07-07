@@ -1,0 +1,11 @@
+module top_module( 
+    input x3,
+    input x2,
+    input x1, 
+    output f   
+);
+wire w1,w2;
+assign w1 =(~x3&x2);
+assign w2=(x3&x1);
+assign f=w1|w2;
+endmodule
