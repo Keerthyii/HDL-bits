@@ -1,0 +1,26 @@
+module full_adder(input a,b,cin,output sum,output carry);
+    assign sum = a ^ b ^ cin;
+    assign carry = (a & b) | (b & cin) | (cin & a); 
+endmodule
+
+module top_module( 
+    input [99:0] a, b,
+    input cin,
+    output [99:0] cout,
+    output [99:0] sum
+);
+
+    genvar i;
+
+    generate 
+        for(i=0; i<100; i=i+1) begin : rca
+            if(i==0) begin : first
+                full_adder fa1(a[i], b[i], cin, sum[i], cout[i]);
+            end
+            else begin : second
+                full_adder fa1(a[i], b[i], cout[i-1], sum[i], cout[i]);
+            end
+        end
+    endgenerate
+
+endmodule
